@@ -3,6 +3,7 @@ package main
 import (
 	"curioz/api"
 	"curioz/cameras"
+	"curioz/worker"
 	"fmt"
 )
 
@@ -12,9 +13,11 @@ type camera struct {
 }
 
 func main() {
-	_, err := api.Get(1000, cameras.FHAZ)
+	response, err := api.Get(1000, cameras.FHAZ)
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	worker.Fetch(response)
 
 }

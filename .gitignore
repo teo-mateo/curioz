@@ -6,6 +6,7 @@
 # Folders
 _obj
 _test
+img_result
 
 # Architecture specific extensions/prefixes
 *.[568vq]
