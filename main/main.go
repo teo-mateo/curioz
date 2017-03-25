@@ -13,11 +13,16 @@ type camera struct {
 }
 
 func main() {
-	response, err := api.Get(1000, cameras.FHAZ)
-	if err != nil {
-		fmt.Println(err)
-	}
 
-	worker.Fetch(response)
+	sol := 1
+	for sol <= 500 {
+		response, err := api.Get(sol, cameras.FHAZ)
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		worker.Fetch(sol, response)
+		sol++
+	}
 
 }

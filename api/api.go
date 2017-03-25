@@ -40,7 +40,7 @@ func Get(sol int, camera string) (r Response, err error) {
 	//decode json
 	dec := json.NewDecoder(strings.NewReader(j))
 	dec.Decode(&r)
-	fmt.Printf("%d bytes decoded", len(bytes))
+	fmt.Printf("%d bytes decoded\n", len(bytes))
 
 	//return response
 	return
