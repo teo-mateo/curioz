@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Launch Package",
             "type": "go",
@@ -12,8 +13,13 @@
             "name": "Launch file",
             "type": "go",
             "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceRoot}/main/main.go"
+            "mode": "exec",
+            "program": "${workspaceRoot}/main/main.go",
+            "args": [
+                "--sol=1100",
+                "--cam=FHAZ",
+                "--dest=f:\\MARS\\img_result"
+            ]
         },
         {
             "name": "Launch",
