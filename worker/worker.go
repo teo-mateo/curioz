@@ -14,9 +14,14 @@ import (
 var wg sync.WaitGroup
 
 //Fetch fetches all images from the given API response
-func Fetch(sol int, response api.Response) (err error) {
+func Fetch(sol int, camera string, response api.Response) (err error) {
 
 	fmt.Println("SOL: ", sol)
+
+	//channel to use as a semaphore.
+	//its capacity of 6 will block until a task finishes and removes from it
+	//
+	sem := make(chan bool, 6)
 
 	if len(response.Photos) == 0 {
 		fmt.Printf("Sol %d: no pictures.\n", sol)
@@ -24,22 +29,27 @@ func Fetch(sol int, response api.Response) (err error) {
 	}
 
 	for _, photo := range response.Photos {
-		fetchImage(sol, photo.ImgSrc)
+		sem <- true
+		wg.Add(1)
+		go func(s int, c string, i string) {
+			defer func() { <-sem }()
+			fetchImage(s, c, i)
+		}(sol, camera, photo.ImgSrc)
 	}
 
 	return nil
 }
 
-func fetchImage(sol int, url string) (err error) {
+func fetchImage(sol int, camera string, url string) (err error) {
 
-	// //wait for me!
-	// defer wg.Done()
+	//wait for me!
+	defer wg.Done()
 
 	fmt.Println(url)
 
 	//build path of output file;
 	index := strings.LastIndex(url, "/") + 1
-	fn := "sol_" + strconv.Itoa(sol) + "_" + url[index:]
+	fn := "sol_" + strconv.Itoa(sol) + "_" + camera + "_" + url[index:]
 	cwd, er := os.Getwd()
 	if er != nil {
 		return er

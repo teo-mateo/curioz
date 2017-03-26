@@ -14,14 +14,14 @@ type camera struct {
 
 func main() {
 
-	sol := 1
-	for sol <= 500 {
-		response, err := api.Get(sol, cameras.FHAZ)
+	sol := 1500
+	for sol <= 1600 {
+		response, err := api.Get(sol, cameras.NAVCAM)
 		if err != nil {
 			fmt.Println(err)
 			break
 		}
-		worker.Fetch(sol, response)
+		worker.Fetch(sol, cameras.MAST, response)
 		sol++
 	}
 
