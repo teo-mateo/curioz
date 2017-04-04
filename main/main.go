@@ -108,5 +108,5 @@ func printHelp() {
 	fmt.Printf("\t\tNAVCAM - Navigation Camera\n")
 	fmt.Printf("\t\tPANCAM - Panoramic Camera\n")
 	fmt.Printf("Usage example:\n")
-	fmt.Printf("\tcurioz --sol=1000 --cam=FHAZ")
+	fmt.Printf("\tcurioz --sol=1000 --cam=FHAZ\n")
 }
