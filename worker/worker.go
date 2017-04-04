@@ -1,8 +1,8 @@
 package worker
 
 import (
-	"curioz/api"
 	"fmt"
+	"github.com/teo-mateo/curioz/api"
 	"io/ioutil"
 	"net/http"
 	"os"

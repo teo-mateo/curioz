@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -20,6 +21,12 @@ func Get(sol int, camera string) (r Response, err error) {
 
 	//build url
 	key := os.Getenv("NASADEV")
+
+	if key == "" {
+		err = errors.New("Missing API Key. Set it to env variable NASADEV")
+		return
+	}
+
 	url := CURIOSITY + "?sol=" + strconv.Itoa(sol) + "&camera=" + strings.ToLower(camera) + "&api_key=" + key
 	fmt.Println(url)
 

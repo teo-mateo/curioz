@@ -1,12 +1,12 @@
 package main
 
 import (
-	"curioz/api"
-	"curioz/cameras"
-	"curioz/worker"
 	"errors"
 	"flag"
 	"fmt"
+	"github.com/teo-mateo/curioz/api"
+	"github.com/teo-mateo/curioz/cameras"
+	"github.com/teo-mateo/curioz/worker"
 	"os"
 	"path"
 )
